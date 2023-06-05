@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>QuestO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            font-family: "Your Handwriting Font", cursive;
+            text-align: center;
+        }
+
+        #content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Blur effect */
+        .blur {
+            /* blured but slowly */
+            transition: 1s;
+            filter: blur(5px);
+            pointer-events: none;
+           
+          
+            
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #textareaContainer {
+            margin-top: 20px;
+        }
+
+        #textareaContainer label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1>QuestO</h1>
+    </div>
+
+    <div id="content">
+        <div class="form-container">
+            <form id="uploadForm" action="/" th:object="${myForm}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">İsim:</label>
+                    <input type="text" class="form-control" id="nameInput" th:field="*{name}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="photoInput" class="form-label">Fotoğraf Yükle:</label>
+                    <input type="file" class="form-control" id="photoInput"  accept="image/*" th:field="*{photo}" >
+                </div>
+                <div class="text-center">
+                    <button id="send" onclick="onClick()" type="submit" class="btn btn-primary">Gönder</button>
+                </div>
+            </form>
+            <div id="textareaContainer" class="text-center">
+                <label for="textareaInput" class="form-label">Metin Alanı:</label>
+                <textarea id="textareaInput" class="form-control" rows="5" th:text="${answer}"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var uploadForm = document.getElementById("uploadForm");
+        var nameInput = document.getElementById("nameInput");
+        var photoInput = document.getElementById("photoInput");
+        var textareaInput = document.getElementById("textareaInput");
+        var sendButton = document.getElementById("send");
+        function onClick() {
+            if (nameInput.value == "") {
+                alert("İsim alanı boş bırakılamaz!");
+                return;
+            }else if (photoInput.value == "") {
+                alert("Fotoğraf alanı boş bırakılamaz!");
+                return;
+            }
+            document.body.classList.add("blur");
+            
+        }
+        
+        
+        
+
+    </script>
+</body>
+
+</html>
