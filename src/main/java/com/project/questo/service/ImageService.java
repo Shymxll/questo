@@ -32,15 +32,17 @@ public class ImageService {
         MultipartFile file = myForm.getPhoto();
         if (!file.isEmpty()) {
             try {
-                String uploadDirectory = "src/main/resources/imgs/";
+                String currentDirectory = System.getProperty("user.dir");
+
+                String uploadDirectory =currentDirectory+ "/src/main/resources/imgs/";
                 String filePath = uploadDirectory + file.getOriginalFilename();
                 File dest = new File(filePath);
                 FileUtils.copyInputStreamToFile(file.getInputStream(), dest);
                 return this.readImage(filePath,"eng");
-            } catch (IOException e) {
+            } catch (Exception e) {
 
                 log.error("File upload failed", e);
-                return e.getStackTrace().toString();
+                return e.getMessage();
             }
         } else {
             log.error("File not founded");
