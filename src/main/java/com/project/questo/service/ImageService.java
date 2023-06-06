@@ -40,7 +40,7 @@ public class ImageService {
             } catch (IOException e) {
 
                 log.error("File upload failed", e);
-                return "File upload failed";
+                return e.getStackTrace().toString();
             }
         } else {
             log.error("File not founded");

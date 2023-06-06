@@ -39,13 +39,11 @@ public class GenericController {
     public String getQuestion(@ModelAttribute("myForm") MyForm myForm, Model model) {
         log.info("name: {}", myForm.getName() + "\n photo: " + myForm.getPhoto().getOriginalFilename());
         String photoText = this.imageService.uploadImage(myForm);
-        if (photoText == "File upload failed" || photoText == "File not founded") {
+       
             model.addAttribute("answer", photoText);
             return "index";
-        }
-        String answer = this.aiService.getChat(photoText);
-        model.addAttribute("answer", answer);
-        return "index";
+        
+        
 
     }
 }
