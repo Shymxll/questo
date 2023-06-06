@@ -36,7 +36,7 @@ public class ImageService {
                 String filePath = uploadDirectory + file.getOriginalFilename();
                 File dest = new File(filePath);
                 FileUtils.copyInputStreamToFile(file.getInputStream(), dest);
-                return this.readImage(filePath,"tur");
+                return this.readImage(filePath,"eng");
             } catch (IOException e) {
 
                 log.error("File upload failed", e);
