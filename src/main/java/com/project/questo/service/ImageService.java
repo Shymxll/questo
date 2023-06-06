@@ -57,7 +57,7 @@ public class ImageService {
         
                 File imageFile = new File(path);
                 String tesseractPath = System.getProperty("user.dir") +"/src/main/resources/tessdata";
-                tesseract.setDatapath("src/main/resources/tessdata");
+                tesseract.setDatapath(tesseractPath);
                 String result = tesseract.doOCR(imageFile);
                 
             
