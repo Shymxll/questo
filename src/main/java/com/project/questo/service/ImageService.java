@@ -38,7 +38,7 @@ public class ImageService {
             try {
                 
 
-                String uploadDirectory ="src/main/resources/imgs/" + "Screenshot_4.png";
+                String uploadDirectory ="src/main/resources/imgs/" + "Screenshot_2.png";
                 String filePath = uploadDirectory + file.getOriginalFilename();
                
                 //File dest = new File(filePath);
