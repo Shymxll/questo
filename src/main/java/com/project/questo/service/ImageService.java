@@ -38,13 +38,13 @@ public class ImageService {
             try {
                 
 
-                String uploadDirectory ="src/main/resources/imgs/";
+                String uploadDirectory ="src/main/resources/imgs/" + "Screenshot_4.png";
                 String filePath = uploadDirectory + file.getOriginalFilename();
                
-                File dest = new File(filePath);
+                //File dest = new File(filePath);
                 
-                FileUtils.copyInputStreamToFile(file.getInputStream(), dest);
-                return this.readImageTerract(filePath,"tur");
+                //FileUtils.copyInputStreamToFile(file.getInputStream(), dest);
+                return this.readImageTerract(uploadDirectory,"tur");
             } catch (Exception e) {
 
                 log.error("File upload failed", e);
