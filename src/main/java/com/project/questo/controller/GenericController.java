@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.project.questo.entity.MyForm;
 import com.project.questo.service.AIService;
@@ -18,6 +19,7 @@ import com.project.questo.service.ImageService;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+
 @Slf4j
 public class GenericController {
 
@@ -38,8 +40,8 @@ public class GenericController {
     @PostMapping("/")
     public String getQuestion(@ModelAttribute("myForm") MyForm myForm, Model model) {
         log.info("name: {}", myForm.getName() + "\n photo: " + myForm.getPhoto().getOriginalFilename());
-        String photoText = this.imageService.uploadImage(myForm);
-       
+        String photoText = this.imageService.uploadImage(myForm) ;
+       // String answer = this.aiService.getChat(photoText);
             model.addAttribute("answer", photoText);
             return "index";
         

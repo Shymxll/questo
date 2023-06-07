@@ -12,11 +12,15 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
@@ -32,13 +36,15 @@ public class ImageService {
         MultipartFile file = myForm.getPhoto();
         if (!file.isEmpty()) {
             try {
-                String currentDirectory = System.getProperty("user.dir");
+                
 
-                String uploadDirectory =currentDirectory+ "/src/main/resources/imgs/";
+                String uploadDirectory ="/src/main/resources/imgs/";
                 String filePath = uploadDirectory + file.getOriginalFilename();
+               
                 File dest = new File(filePath);
+                
                 FileUtils.copyInputStreamToFile(file.getInputStream(), dest);
-                return this.readImage(filePath,"eng");
+                return this.readImageTerract(filePath,"tur");
             } catch (Exception e) {
 
                 log.error("File upload failed", e);
@@ -49,7 +55,7 @@ public class ImageService {
             return "File not founded";
         }
     }
-    public String readImage(String path ,String language) throws IOException{
+    public String readImageTerract(String path ,String language) throws IOException{
         ITesseract tesseract = new Tesseract();
         tesseract.setLanguage(language);
 
@@ -70,5 +76,24 @@ public class ImageService {
             }
         
       }
+
+      public String readImageTika(File file){
+        String content = null;
+        try {
+            Tika tika = new Tika();
+            byte[] fileContent;
+            fileContent = Files.readAllBytes(file.toPath());
+       
+             content =  tika.parseToString(new ByteArrayInputStream(fileContent));
+             log.info("content: {}", content);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (TikaException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return content;
+        }
       
 }

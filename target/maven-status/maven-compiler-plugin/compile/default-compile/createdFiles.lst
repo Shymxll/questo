@@ -1,6 +1,7 @@
 com\project\questo\entity\MyForm.class
 com\project\questo\controller\GenericController.class
 com\project\questo\entity\Message.class
+com\project\questo\service\OpencvService.class
 com\project\questo\response\AIResponse.class
 com\project\questo\service\ImageService.class
 com\project\questo\response\AIResponse$Choice.class
