@@ -60,7 +60,7 @@ public class ImageService {
         tesseract.setLanguage(language);
 
             try {
-        
+                  //sda
                 File imageFile = new File(path);
                 
                 String result = tesseract.doOCR(imageFile);
